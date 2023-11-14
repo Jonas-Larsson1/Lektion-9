@@ -255,12 +255,12 @@ const getAndDisplayScores = () => {
 }
 
 const tick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (timeLimit > 0.0) {
         let currentTick = Date.now()
         const deltaTime = (currentTick - lastTick)
         lastTick = currentTick
         spawnTimer += deltaTime
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
         timeLimit -= (deltaTime / 1000)
         timerElement.innerText = timeLimit.toFixed(1)
         scoreElement.innerText = `Score: ${score}`
