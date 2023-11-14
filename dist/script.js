@@ -24,6 +24,8 @@ let player = {
 
 let apples = [];
 
+const scoreMessages = []
+
 const playerSprite = new Image()
 playerSprite.src = 'basket.png'
 
@@ -89,6 +91,23 @@ function drawPlayer() {
     // ctx.fillRect(player.x, player.y, player.width, player.height)
 }
 
+const addScoreMessage = (message, x, y, color) => {
+    scoreMessages.push({text: message, x, y, color, duration: 60})
+}
+
+const drawScoreMessages = () => {
+    scoreMessages.forEach((message,index) => {
+        ctx.fillStyle = message.color
+        ctx.font = '16px Segoe UI'
+        ctx.fillText(message.text, message.x, message.y)
+        message.duration--
+
+        if (message.duration <= 0) {
+            scoreMessages.splice(index, 1)
+        }
+    })
+}
+
 const movePlayer = () => {
 
     const lerp = (a, b, t) => (1 - t) * a + t * b
@@ -111,6 +130,16 @@ const movePlayer = () => {
         player.x = canvas.width - player.width
         player.velX = 0
     }
+
+
+    // if (player.velX > 0) {
+    //     document.body.style.cursor = 'e-resize'
+    // } else if (player.velX < 0) {
+    //     document.body.style.cursor = 'w-resize'
+    // }
+    // console.log(player.velX)
+    // document.body.style.cursor = player.velX > 0 ? 'e-resize' : player.velX < 0 ? 'w-resize' : 'auto';
+    // player.velX > 0 ? console.log('going right') : player.velX < 0 ? console.log('moving right') : console.log('not moving');
 }
 
 
@@ -244,8 +273,10 @@ const tick = () => {
             if (checkCollision(apple, player)) {
                 apples.splice(index, 1)
                 score += 1
+                addScoreMessage('+1', apple.x, apple.y, 'green')
             } else if (apple.y > canvas.height) {
                 score -= 1
+                addScoreMessage('-1', apple.x, (apple.y - apple.height), 'red')
                 apples.splice(index, 1)
             }
             
@@ -259,7 +290,8 @@ const tick = () => {
         movePlayer()
         drawPlayer()
         drawApples()
-   
+        drawScoreMessages()
+
         requestAnimationFrame(tick)
     } else {
         gameOver()
