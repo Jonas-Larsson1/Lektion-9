@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: start;
+            }
+
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #start {
+                font-size: 1.5rem;
+            }
+            canvas {
+                border: 1px solid black;
+                margin: 0.5rem;
+            }
+
+            aside {
+                margin-left: 4rem;
+                width: 10rem;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th:nth-child(even),
+            td:nth-child(even) {
+                text-align: right;
+            }
+
+            th {
+
+                background-color: #f2f2f2;
+            }
+
+        </style>
+    </head>
+    <body>
+        <main>
+            <h2 id="timer">30.0</h2>
+            <canvas id="canvas"></canvas>
+            <h2 id="score">Score: 0</h2>
+            <button id="start">Start</button>
+        </main>
+        <aside>
+            <h2>High scores</h2>
+            <!-- <ol id="high-scores">
+
+            </ol> -->
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="high-scores">
+                </tbody>
+            </table>
+            <button id="clear">Clear scores</button>
+        </aside>
+    </body>
+    <script src="script.js"></script>
+</html>
