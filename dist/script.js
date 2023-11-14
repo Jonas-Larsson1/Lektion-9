@@ -34,8 +34,8 @@ appleSprite.src = 'apple.png'
 
 function Apple() {
     this.color = "red";
-    this.x = Math.random() * canvas.width;
-    this.y = 0;
+    this.x = Math.random() * (canvas.width - 20) + 10;
+    this.y = -20;
     this.radius = 10;
     this.width = this.radius * 2;
     this.height = this.radius * 2;
