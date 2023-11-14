@@ -24,14 +24,19 @@ let player = {
 
 let apples = [];
 
+const playerSprite = new Image()
+playerSprite.src = 'basket.png'
+
+const appleSprite = new Image()
+appleSprite.src = 'apple.png'
 
 function Apple() {
     this.color = "red";
     this.x = Math.random() * canvas.width;
     this.y = 0;
     this.radius = 10;
-    this.width = 10;
-    this.height = 10;
+    this.width = this.radius * 2;
+    this.height = this.radius * 2;
     // this.speed = Math.random() * 2 + 1; 
     const minSpeed = 0.1
     const maxSpeed = 0.3
@@ -39,11 +44,15 @@ function Apple() {
 }
 
 function drawApple(apple){
-    ctx.beginPath();
-    ctx.arc(apple.x, apple.y, apple.radius, 0, Math.PI * 2);
-    ctx.fillStyle = apple.color;
-    ctx.fill();
-    ctx.closePath();
+
+    ctx.imageSmoothingEnabled = false
+    ctx.drawImage(appleSprite, apple.x, apple.y, apple.width, apple.height)
+
+//     ctx.beginPath();
+//     ctx.arc(apple.x, apple.y, apple.radius, 0, Math.PI * 2);
+//     ctx.fillStyle = apple.color;
+//     ctx.fill();
+//     ctx.closePath();
 }
 
 // function updateApples(){
@@ -73,8 +82,11 @@ function drawApples(){
 // drawApples();
 
 function drawPlayer() {
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height)
+    ctx.imageSmoothingEnabled = false
+    ctx.drawImage(playerSprite, player.x, player.y, player.width, player.height)
+    
+    // ctx.fillStyle = player.color;
+    // ctx.fillRect(player.x, player.y, player.width, player.height)
 }
 
 const movePlayer = () => {
